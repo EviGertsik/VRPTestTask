@@ -1,8 +1,8 @@
 <apex:page id="page" controller="ImageDetailPageCtrl">
-    <apex:pageMessages escape="true"/>
-    <apex:form >
-        <apex:pageBlock id="thisBlock" >  
-            <apex:pageBlockTable value="{!images}" var="i">
+    <apex:pageMessages rendered="true"/>
+    <apex:form id="theForm" >
+        <apex:pageBlock id="recordBlock" >  
+            <apex:pageBlockTable value="{!Images}" var="i">
                 <apex:column value="{!i.id}"/>
                 <apex:column value="{!i.Name}"/>
                 <apex:column value="{!i.Description__c}"/>
@@ -10,17 +10,18 @@
                 <apex:column value="{!i.Active__c}"/>
             </apex:pageBlockTable>
         </apex:pageBlock>
-        <apex:pageBlock title="Create New Image Detail">
-            <apex:pageBlockSection id="createPage">
-                <apex:inputField value="{!img.Name}" required="true"/>
-                <apex:inputField value="{!img.Description__c}" required="true"/>
-                <apex:inputField value="{!img.Extension__c}" required="true"/>
-                <apex:inputCheckbox value="{!img.Active__c}" required="true"/>
-                <apex:commandButton value="Save New Record" reRender="thisBlock" action="{!store}"/>
+        <apex:pageBlock title="Create New Image Detail" >
+            <apex:pageBlockSection id="createPage" columns="1">
+                <apex:inputField value="{!img.Name}" />
+                <apex:inputField value="{!img.Description__c}" />
+                <apex:inputField value="{!img.Extension__c}" />
+                <apex:inputField value="{!img.Link__c}"/>
+                <apex:inputCheckbox value="{!img.Active__c}"/>
+                <apex:commandButton value="Save New Record" reRender="theForm" action="{!save}"/>
             </apex:pageBlockSection>
         </apex:pageBlock>
         <apex:pageBlock >
-                <apex:commandButton value="Delete Inactive Records"  action="{!deleteInactiveRecords}"/>
+                <apex:commandButton value="Delete Inactive Records" action="{!deleteInactiveRecords}"/>
         </apex:pageBlock>   
     </apex:form>
 </apex:page>
